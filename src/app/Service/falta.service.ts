@@ -18,6 +18,14 @@ export class FaltaService {
   guardarFalta(falta:Falta): Observable<Object>{
   return this.httpClient.post(`${this.baseURL}`,falta);
 }
+
+guardarFaltaConArchivo(file: File, falta: any): Observable<any> {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('falta', JSON.stringify(falta));
+
+  return this.httpClient.post('/ConArchivo', formData);
+}
  
 //este metodo es para eliminar una falta
 eliminarFalta(id:number): Observable<Object>{

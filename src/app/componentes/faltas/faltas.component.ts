@@ -43,7 +43,19 @@ export class FaltasComponent implements OnInit {
     },error => console.log(error));
   }
 
-   
+  guardarFaltaConArchivo(file: File, falta: any) {
+    this.faltaService.guardarFaltaConArchivo(file, falta).subscribe(
+      (response) => {
+        // La falta y el archivo se guardaron correctamente
+        console.log('Falta y archivo guardados correctamente');
+      },
+      (error) => {
+        // Ocurrió un error al guardar la falta y el archivo
+        console.error('Error al guardar la falta y el archivo:', error);
+      }
+    );
+  }
+    
 
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
