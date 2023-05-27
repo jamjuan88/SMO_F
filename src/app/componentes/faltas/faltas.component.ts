@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { FaltaService } from 'src/app/Service/falta.service';
 import { Falta } from '../model/Falta';
 import { Router } from '@angular/router';
@@ -11,6 +11,9 @@ import { EmpleadoService } from 'src/app/empleado.service';
   styleUrls: ['./faltas.component.css']
 })
 export class FaltasComponent implements OnInit {
+
+  @ViewChild('fileInput', { static: false }) fileInput: ElementRef<HTMLInputElement>;
+
   id:number;
   selectedFile: File;
   file: File | null = null;
@@ -43,7 +46,10 @@ export class FaltasComponent implements OnInit {
     },error => console.log(error));
   }
 
-  guardarFaltaConArchivo(file: File, falta: any) {
+  guardarFaltaConArchivo(falta: any) {
+    const file = this.fileInput.nativeElement.files[0];
+    
+
     this.faltaService.guardarFaltaConArchivo(file, falta).subscribe(
       (response) => {
         // La falta y el archivo se guardaron correctamente
@@ -57,9 +63,13 @@ export class FaltasComponent implements OnInit {
   }
     
 
-  onFileSelected(event: any): void {
-    this.selectedFile = event.target.files[0];
+  onFileSelected(input: HTMLInputElement) {
+    if (input.files && input.files.length > 0) {
+      const file: File = input.files[0];
+      // Aquí puedes realizar las operaciones necesarias con el archivo
+    }
   }
+  
   
 
   MostrarFechaInversa(fechaInicioFalta: Date): string {

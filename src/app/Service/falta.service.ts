@@ -10,7 +10,7 @@ export class FaltaService {
 
    //Esta es la URL del backend de listar todos los empleados
    private baseURL = "http://localhost:8080/faltas";
-  
+   private baseURL2 = "http://localhost:8080/faltas/faltas"
 
   constructor(private httpClient : HttpClient) { }
 
@@ -22,9 +22,9 @@ export class FaltaService {
 guardarFaltaConArchivo(file: File, falta: any): Observable<any> {
   const formData = new FormData();
   formData.append('file', file);
-  formData.append('falta', JSON.stringify(falta));
+  formData.append('falta', falta);
 
-  return this.httpClient.post('/ConArchivo', formData);
+  return this.httpClient.post(`${this.baseURL2}`, formData);
 }
  
 //este metodo es para eliminar una falta
