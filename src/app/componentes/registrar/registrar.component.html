@@ -1,0 +1,155 @@
+  <H1>Registro de Trabajadores</H1>
+<div class="enmarcado">
+<form enctype="multipart/form-data" (ngSubmit)="onSubmit()" >
+<div class="row">
+        
+    <div class="row">     
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+          <p>
+            <label for="nombre">Nombre:</label>
+            <input  type="text" class="form-control" id="nombre" [(ngModel)] = "empleado.nombre" name="nombre" required>
+          </p>
+        </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+          <p>
+            <label for="apellido">Apellido:</label>
+            <input type="text" class="form-control" id="apellido" [(ngModel)] = "empleado.apellido" name="apellido" required>
+          </p>
+        </div>
+      
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+          <p>
+            <label for="dni">DNI:</label>
+            <input type="text" class="form-control" id="DNI" [(ngModel)] = "empleado.dni" name="DNI" required>
+          </p>
+        </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+          <p>
+            <label for="cuil">Cuil:</label>
+            <input type="text" class="form-control" id="Cuil" [(ngModel)] = "empleado.cuil" name="Cuil" required>
+          </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 form-group">
+          <p>
+            <label for="email">email:</label>
+            <input type="text"  class="form-control" id="email" [(ngModel)] = "empleado.email" name="email" required>
+          </p>
+        </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+        <p>
+          <label for="telefono">Teléfono:</label>
+          <input type="text"  class="form-control" id="Telefono" [(ngModel)] = "empleado.telefono" name="Telefono" required>
+        </p>
+      </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+        <p>
+          <label for="fechaNac">Fecha de nacimiento:</label>
+          <input type="date"  class="form-control" id="fecha-nacimiento" [(ngModel)] = "empleado.fechaNac" name="fecha-nacimiento" required>
+        </p>
+      </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+        <p>
+          <label for="fechaIngreso">Fecha de Ingreso:</label>
+          <input type="date"  class="form-control" id="fecha-ingreso" [(ngModel)] = "empleado.fechaIngreso" name="fecha-ingreso" required>
+        </p>
+      </div>
+
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 form-group">
+        <p>
+          <label for="direccion">Dirección:</label>
+          <input type="text"  class="form-control" id="direccion" [(ngModel)] = "empleado.direccion" name="direccion" required>
+        </p>
+      </div>
+
+        
+      </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+        <p>
+          <label for="genero">Género:</label>
+          <select id="genero" [(ngModel)] = "empleado.genero" class="form-control" name="genero" required>
+            <option [ngValue]="undefined"> --- seleccionar Género --- </option>
+            <option value="masculino">Masculino</option>
+            <option value="femenino">Femenino</option>
+            <option value="otro">Otro</option>
+          </select>
+        </p>
+      </div>
+      
+      
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+        <p>
+          <label for="tipoPersona">Categoría:</label>
+          <select id="tipoPersona" [(ngModel)] = "empleado.tipoPersona" class="form-control" name="tipoPersona" required>
+            <option [ngValue]="undefined"> --- seleccionar Categoría --- </option>
+            <option value="candidato">Candidato</option>
+            <option value="trabajador">trabajador</option>
+          </select>
+        </p>
+      </div>
+    
+
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+        <p>
+      <label for="empresa">Empresas:</label>
+      <select [(ngModel)]= "empleado.empresa" id="empresa" name="empresa"> 
+        <option [ngValue]="undefined"> --- seleccionar empresa --- </option>
+        <option *ngFor="let empresa of empresas" [ngValue]= "empresa"> {{ empresa.nombreEmpresa }}</option>
+      </select>
+        </p>
+      </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+        <p>
+      <label for="puesto">Puestos:</label>
+      <select [(ngModel)]= "empleado.puesto" id="puesto" name="puesto"> 
+        <option [ngValue]="undefined"> --- seleccionar puesto --- </option>
+        <option *ngFor="let puesto of puestos" [ngValue]= "puesto"> {{ puesto.nombrePuesto }}</option>
+      </select>
+        </p>
+      </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+        <p>
+      <label for="estadoLaboral">Estado Laboral:</label>
+      <select [(ngModel)]= "empleado.estadoLaboral" id="estadoLaboral" name="estadoLaboral"> 
+        <option [ngValue]="undefined"> --- seleccionar Estado --- </option>
+        <option *ngFor="let estado of estadosLaboral" [ngValue]= "estado"> {{ estado.nombreEstado }} </option>
+      </select>
+        </p>
+      </div>        
+
+  </div>
+    
+    
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+        <p>
+          <label for="antecedentes">Antecedentes Médicos:</label>
+          <textarea id="antecedentes" [(ngModel)] = "empleado.antecedentes" class="form-control" name="antecedentes" required></textarea>
+        </p>
+      </div>
+    </div>
+
+   
+       
+    <div>
+    <p class="btn2 col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+        <button class="btn btn-success" type="submit">Registrar</button>
+    </p>
+    </div>
+        
+   
+
+     </div>
+    </form>
+

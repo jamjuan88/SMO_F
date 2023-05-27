@@ -1,0 +1,115 @@
+<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+    <app-nav-bar-config></app-nav-bar-config>
+</div> 
+
+<div class="row">
+
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h1>Empresas</h1>                
+                <table class="table" role="table">
+                    <thead role="rowgroup">
+                        <tr role="row">
+                            <th role="columnheader">Nombre de la Empresa</th>
+                            <th role="columnheader">Razon Social</th>
+                            <th role="columnheader">Cuit Empresa</th>
+    
+                        </tr>
+                    </thead>
+                    <tbody role="rowgroup">
+                        <tr role="row" *ngFor="let empresa of Empresa">
+                            
+                            <td role="cell">{{empresa.nombreEmpresa}}</td>
+                            <td role="cell">{{empresa.razonSocial}}</td>
+                            <td role="cell">{{empresa.cuitEmpresa}}</td>
+                           <p class="block">
+                               <button (click)="editarEmpresa(empresa.idEmpresa)" class="btn btn-success" type="submit">Editar</button>
+    
+                                <button (click)="eliminarEmpresa(empresa.idEmpresa)" class="btn btn-success"
+                                    type="submit">Eliminar</button>
+                            </p> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h1>Puestos</h1>                
+                <table class="table" role="table">
+                    <thead role="rowgroup">
+                        <tr role="row">
+                            <th role="columnheader">Nombre del Puesto</th>
+                            <th role="columnheader">Departamento</th>
+                            <th role="columnheader">descripción del puesto/th>
+    
+                        </tr>
+                    </thead>
+                    <tbody role="rowgroup">
+                        <tr role="row" *ngFor="let puesto of Puesto">
+                            
+                            <td role="cell">{{puesto.nombrePuesto}}</td>
+                            <td role="cell">{{puesto.departamento}}</td>
+                            <td role="cell">{{puesto.descripcionPuesto}}</td>
+                           <p class="block">
+                               <button (click)="editarPuesto(puesto.idPuesto)" class="btn btn-success" type="submit">Editar</button>
+    
+                                <button (click)="eliminarPuesto(puesto.idPuesto)" class="btn btn-success"
+                                    type="submit">Eliminar</button>
+                            </p> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h1>Estados Empleado</h1>                
+                <table class="table" role="table">
+                    <thead role="rowgroup">
+                        <tr role="row">
+                            <th role="columnheader">Nombre del Estado</th>
+                            <th role="columnheader">Descripcion del Estado</th>
+                                
+                        </tr>
+                    </thead>
+                    <tbody role="rowgroup">
+                        <tr role="row" *ngFor="let estado of Estado">
+                            
+                            <td role="cell">{{estado.nombreEstado}}</td>
+                            <td role="cell">{{estado.descripcionEstado}}</td>
+                         
+                           <p class="block">
+                              <button (click)="editarEstado(estado.idEstado)" class="btn btn-success" type="submit">Editar</button>
+    
+                                <button (click)="eliminarEstado(estado.idEstado)" class="btn btn-success"
+                                    type="submit">Eliminar</button>
+                            </p> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+               
+           
+
+
+

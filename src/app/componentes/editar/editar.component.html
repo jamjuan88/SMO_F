@@ -1,0 +1,150 @@
+<div>
+    <h1>Resumen Del Empleado</h1>
+    <div class="container"> 
+    <div>
+        <h1>Datos Personales</h1>
+       
+        <div>
+            <label>
+              Estado Laboral:
+              <span [ngClass]="{'activo': empleado.estadoLaboral.nombreEstado === 'Activo', 'inactivo': empleado.estadoLaboral.nombreEstado === 'Inactivo'}">
+                {{ empleado.estadoLaboral.nombreEstado }}
+              </span>
+            </label>
+          </div>
+
+          
+     
+          
+
+        <div>
+            <label>Nombre: {{empleado.nombre}} </label>
+        </div>
+
+        <div>
+            <label>Apellido: {{empleado.apellido}}</label>
+        </div>
+
+        <div>
+            <label>Dni: {{empleado.dni}} &nbsp; &nbsp; Cuil: {{empleado.cuil}}  &nbsp; &nbsp; Teléfono: {{empleado.telefono}}</label>
+        </div>
+
+        <div>
+            <label>Email: {{empleado.email}}</label>
+        </div>
+
+        <div>
+            <label>Fecha de Nacimiento: {{ MostrarFechaInversa(empleado.fechaNac) }} &nbsp; &nbsp; Edad: {{ edad }}</label>
+        </div>
+        
+
+        <div>
+            <label>Genero: {{empleado.genero}}</label>
+        </div>
+    </div>     
+
+    <div>
+        <h1>Ficha Del Empleado</h1>
+        
+        <div>
+            <label> <b>Empresa:</b> {{empleado.empresa.nombreEmpresa}} &nbsp; &nbsp; <b>Razon Social:</b> {{empleado.empresa.razonSocial}} &nbsp; &nbsp; <b>Cuit:</b> {{empleado.empresa.cuitEmpresa}}</label>
+        </div>
+        
+        <div>
+            <label><b>Puesto:</b> {{empleado.puesto.nombrePuesto}} &nbsp; &nbsp; <b>Departamento:</b> {{empleado.puesto.departamento}} &nbsp; &nbsp; <b>Descripción del Puesto:</b> {{empleado.puesto.descripcionPuesto}}</label>
+        </div>
+
+        <div>
+            <label><b>Categoría:</b> {{empleado.tipoPersona}}</label>
+        </div>
+ 
+          <div class="direccion-container">
+            <label class="direccion-label"><b>Dirección:</b> {{empleado.direccion}} <a href="{{url}}" target="_blank">Abrir dirección en Google Maps</a></label>
+            
+          </div>
+          
+
+        <div>
+            <label><b>Fecha de Ingreso:</b> {{empleado.fechaIngreso}} &nbsp; <b>Tiempo en la empresa:</b> {{ tiempo2 }} &nbsp; <b>Periodos con faltas:</b> {{ cantidadFaltas }} </label> 
+           <label><b>Cantidad Total de Días Faltados: {{cantidadFaltasDias}}</b></label>
+        </div>
+
+        
+        
+        <div>
+            <h1>Antecedentes Médicos</h1>
+           
+        </div>
+
+        <P class="parrafo">{{empleado.antecedentes}}
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque voluptatem similique ad fuga eligendi aliquam odio quia deleniti tempora. Doloribus unde, reprehenderit quasi fugit accusamus consequuntur dignissimos minus porro animi!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum molestiae sed, doloremque aliquid velit ea rerum est rem molestias ducimus illum soluta eos, tempora eaque sint ut eveniet accusantium error.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse ab maiores doloremque facere magni modi eligendi nam temporibus fugiat omnis dolorum rem odit labore veritatis, repellat rerum placeat aut ad!
+        </P>
+    </div>
+
+   
+    <div >
+        <button (click)="editarEmpleado(empleado.id)" class="btnEdit">Editar</button>
+   </div>
+    
+
+   
+
+    </div>
+
+
+<h1>Archivos del candidato</h1>
+<div class="container2">
+    <div class="row">
+        <div class="col listaArchivos">
+            <ul>
+                <li *ngFor="let file of empleadoFiles" (click)="openFile(employeeId, file)">
+                  {{ file }}
+                  &nbsp; &nbsp; &nbsp; <span class="eliminar-icon" (click)="deleteFile(employeeId, file); $event.stopPropagation()">Eliminar</span>
+                </li>
+            </ul>
+        </div>
+        <div class="row btnSubir">
+            <button (click)="subirArchivos(empleado.id)" class="btnEdit2">Subir archivo</button>
+        </div>
+    </div>
+</div>
+
+
+
+<h1>Lista de Faltas</h1>
+
+<div class="container3">  
+     
+            <table class="table2">         
+              <thead>
+                  <tr>
+                      <th scope="col">tipo de falta</th>
+                      <th scope="col">Descripcion de la falta</th>
+                      <th scope="col">Fecha Inicial de La Falta </th>
+                      <th scope="col">Fecha de Reincorporación</th>
+                      <th scope="col">Dias Faltados</th>
+                                         
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let falta of faltas"> 
+                      <td>{{falta.tipoFalta}}</td>
+                      <td>{{falta.descripcionFalta}}</td>
+                      <td>{{MostrarFechaInversa(falta.fechaFaltaInicio)}}</td>
+                      <td>{{MostrarFechaInversa(falta.fechaFaltaFinal)}}</td>
+                      <td>{{calcularDias(falta.fechaFaltaInicio , falta.fechaFaltaFinal)}} </td>
+
+                </tr>  
+                           
+              </tbody>
+          </table>
+
+
+        </div>
+
+
+      
+</div>
+    

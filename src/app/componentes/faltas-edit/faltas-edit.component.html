@@ -1,0 +1,59 @@
+<H1>Registro de faltas</H1>
+<div class="enmarcado">
+
+
+  <div class="row">
+    <form>
+    <div class="row">
+  <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+    <p>
+    <label>Fecha Inicial:</label>
+    <input type="date" class="form-control" [(ngModel)]= "faltas.fechaFaltaInicio" name="fechaFalta">
+  </p>
+
+  <p>
+  <label>Fecha Final:</label>
+  <input type="date" class="form-control" [(ngModel)]= "faltas.fechaFaltaFinal" name="fechaFalta">
+</p>
+
+</div>
+
+<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+  <p>
+    <label>Tipo de Falta:</label>
+    <select [(ngModel)]= "faltas.tipoFalta" name="tipo">
+      <option value="ENFERMEDAD">Enfermedad</option>
+      <option value="SIN_CAUSA">Sin causa</option>
+      <option value="SIN_CAUSA">Por Luto</option>
+      <option value="SIN_CAUSA">Asunto Familiar</option>
+    </select>
+  </p>
+</div>
+
+<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+  <p>
+    <label>Descripción de la Falta:</label>
+    <input type="text" [(ngModel)]= "faltas.descripcionFalta" name="descripcion">
+  </p>
+</div>
+
+    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+      <p>
+    <label for="empleado">Empleado:</label>
+    <select [(ngModel)] = "faltas.empleado.id" id="empleado" name="empleado"> 
+      <option [value]= "undefined"> --- seleccionar empleado --- </option>
+      <option *ngFor="let empleado of empleados" [value]= "empleado.id"> {{ empleado.nombre }} {{ empleado.apellido }}</option>
+    </select>
+      </p>
+    </div>
+
+    <button (click)="Actualizar(faltas.id)" class="btn btn-success">Actualizar</button>
+  </div>
+
+  </form>
+</div>
+</div>
+
+
+
+  

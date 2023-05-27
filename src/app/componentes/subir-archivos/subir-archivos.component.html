@@ -1,0 +1,11 @@
+<form>
+  <h1>Subir Archivos</h1>
+  <label for="nombre">Empleado: {{empleados.nombre}} {{empleados.apellido}}</label>    
+   
+  <input type="text" id="employeeId" name="employeeId" value="informancion no editable" disabled [(ngModel)]="employeeId"><br>
+  <label for="fileName">File Name:</label><br>
+  <input type="text" id="fileName" name="fileName" placeholder="ingrese nombre para guardar archivo" [(ngModel)]="fileName"><br><br>
+  <input type="file" (change)="handleFileInput($event)">
+  <button (click)="uploadFile()">Upload</button>
+</form>
+

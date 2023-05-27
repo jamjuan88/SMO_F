@@ -1,0 +1,112 @@
+<H1>Registro de faltas</H1>
+<div class="enmarcado">
+
+
+  <div class="row">
+    <form (submit)="guardarFalta()">
+
+    <div class="row">
+
+  <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 form-group">
+    <p>
+      <label>Fecha Inicial:</label>
+      <input type="date" [(ngModel)]="falta.fechaFaltaInicio" name="fechaFalta">
+    </p>
+  </div>
+
+   <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 form-group">
+    <p>
+      <label>Fecha Final:</label>
+      <input type="date" [(ngModel)]="falta.fechaFaltaFinal" name="fechaFalta">
+    </p>
+  </div>
+ 
+
+<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 form-group">
+  <p>
+    <label>Tipo de Falta:</label>
+    <select [(ngModel)]="falta.tipoFalta" name="tipo">
+      <option value="ENFERMEDAD">Enfermedad</option>
+      <option value="SIN_CAUSA">Sin causa</option>
+      <option value="SIN_CAUSA">Por Luto</option>
+      <option value="SIN_CAUSA">Asunto Familiar</option>
+    </select>
+  </p>
+</div>
+
+<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+  <p>
+    <label>Descripción de la Falta:</label>
+    <input type="text" [(ngModel)]="falta.descripcionFalta" name="descripcion">
+  </p>
+</div>
+
+    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+      <p>
+    <label for="empleado">Empleado:</label>
+    <select [(ngModel)] ="falta.empleado" id="empleado" name="empleado"> 
+      <option [ngValue]="undefined"> --- seleccionar empleado --- </option>
+      <option *ngFor="let empleado of empleados" [ngValue]="empleado">{{ empleado.nombre }} {{ empleado.apellido }}</option>
+    </select>
+      </p>
+    </div>
+ 
+    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+      <p>
+        <label for="fileInput">Archivo:</label>
+        <input type="file" id="fileInput" (change)="onFileSelected($event)">
+      </p>
+    </div>
+   
+    
+
+    <button type="submit">Guardar falta</button>
+  </div>
+
+  </form>
+</div>
+</div>
+
+<h1>Lista De Faltas </h1>  
+<div class="container"> 
+ 
+    <table class="table">
+      <input type="text" [(ngModel)]="term" placeholder="Buscar...">          
+          <thead>
+              <tr>
+                  <th scope="col">Nombre </th>
+                  <th scope="col">tipo de falta</th>
+                  <th scope="col">Descripcion de la falta</th>
+                  <th scope="col">Fecha Inicial Falta</th>
+                  <th scope="col">Fecha de Reincorporación</th>
+                  <th scope="col">Dias Faltados</th>
+                  <th></th>
+
+                  
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let falta of faltas | filter: term"> 
+                  <td>{{falta.empleado.nombre}} {{falta.empleado.apellido}}</td>
+                  <td>{{falta.tipoFalta}}</td>
+                  <td>{{falta.descripcionFalta}}</td>
+                  <td>{{ MostrarFechaInversa(falta.fechaFaltaInicio) }}</td>
+                  <td>{{ MostrarFechaInversa(falta.fechaFaltaFinal) }}</td>
+                  <td>{{ calcularDias(falta.fechaFaltaInicio,falta.fechaFaltaFinal)}} </td>                          
+
+
+                   <td>                    
+                      <button (click)="verDetallesEmpleado(falta.empleado.id)" class="btn btn-success" type="submit">Ver Detalles</button>
+                   </td>
+                   <td>
+                    <button (click)="editarFalta(falta.id)" class="btn btn-success" type="submit">Editar</button>
+                   </td>
+                   <td>
+                      <button (click)="eliminarFalta(falta.id)" class="btn btn-success" type="submit">Eliminar</button>
+                  </td>
+              </tr>                  
+          </tbody>
+      </table>
+  </div>
+
+  

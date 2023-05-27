@@ -1,0 +1,40 @@
+<div class="container">  
+       
+        <h1>Lista Empleados</h1>
+        <input type="text" [(ngModel)]="term" placeholder="Buscar...">
+    
+        <table class="table">         
+                <thead>
+                    <tr>
+                        <th scope="col">nombre</th>
+                        <th scope="col">apellido</th>
+                        <th scope="col">dni</th>
+                        <th scope="col">tipo de Persona</th>
+                        <th scope="col">Empresas</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let empleado of empleados | filter: term">
+                       
+                        <td>{{empleado.nombre}}</td>
+                        <td>{{empleado.apellido}}</td>
+                        <td>{{empleado.dni}}</td>
+                        <td>{{empleado.tipoPersona}}</td> 
+                        <td>{{empleado.empresa.nombreEmpresa}}</td>                           
+                         <td>                    
+                            <button (click)="verDetallesEmpleado(empleado.id)" class="btn btn-success" type="submit">Ver Detalles</button>
+                         </td>
+                         <td>
+                            <button (click)="eliminarEmpleado(empleado.id)" class="btn btn-success" type="submit">Eliminar</button>
+                        </td>
+                    </tr>                  
+                </tbody>
+            </table>
+        </div>
+    
+
+
+
