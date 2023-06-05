@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Empleado } from 'src/app/empleado';
 import { EmpleadoService } from 'src/app/empleado.service';
-
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { FaltaService } from 'src/app/Service/falta.service';
 import { Falta } from '../model/Falta';
+import { AntecedentesEmpleado } from '../model/AntecedentesEmpleado';
+import { AntecedentesService } from 'src/app/Service/antecedentes.service';
 
 
 @Component({
@@ -15,6 +17,7 @@ import { Falta } from '../model/Falta';
 export class EditarComponent implements OnInit {
 
   id:number;
+  
   edad:number;
   tiempo:number;
   tiempo2:string;
@@ -22,10 +25,14 @@ export class EditarComponent implements OnInit {
   empleado:Empleado;
   fechaActual = new Date();
   faltas: Falta[];
+  falta: Falta;
+  antecedentes: AntecedentesEmpleado[];
+  antecedente: AntecedentesEmpleado;
   cantidadFaltas:number;
   totalDiasFaltados:number = 0;
   cantidadFaltasDias:number;
   empleadoFiles: string[] = [];
+  nombreArch:string;
   selectedFile: File;
   fileName: string;
   employeeId = '';
@@ -33,6 +40,7 @@ export class EditarComponent implements OnInit {
   selectedFiles?: FileList;
   progressInfos: any[] = [];
   message: string[] = [];
+  
  
   
    
@@ -40,13 +48,15 @@ export class EditarComponent implements OnInit {
   constructor(private route:ActivatedRoute,
     private empleadoService:EmpleadoService,
     private router:Router,
+    private sanitizer: DomSanitizer,
+    private antecedentesService: AntecedentesService,
     private faltaService: FaltaService
     ) { }
 
   ngOnInit(): void {
     
     this.id = this.route.snapshot.params['id']; 
-    this.employeeId = this.id.toString();   
+    this.employeeId = this.id.toString(); 
     this.empleado = new Empleado();
     this.empleadoService.obtenerEmpleadoPorId(this.id).subscribe(dato => {
       this.empleado = dato;
@@ -56,8 +66,7 @@ export class EditarComponent implements OnInit {
       this.url = this.irADireccion();
       this.obtenerListaFaltas(this.empleado.id);
       this.getEmployeeFiles();
-      
-          
+      this.obtenerListaAntecedentesPorEmpleado(this.empleado.id);          
     });
   }
 
@@ -147,6 +156,12 @@ export class EditarComponent implements OnInit {
       this.cantidadFaltasDias = totalDiasFaltados;
     });
   }
+
+  private obtenerListaAntecedentesPorEmpleado(id: number) {
+    this.antecedentesService.obtenerAntecedentesPorEmpleado(id).subscribe(dato => {
+      this.antecedentes = dato;     
+    });
+  }
   
   guardarEstadoLaboral() {
     this.empleadoService.actualizarEstadoLaboral(this.empleado.id, this.empleado.estadoLaboral).subscribe(
@@ -181,6 +196,19 @@ export class EditarComponent implements OnInit {
     this.empleadoService.openFile(employeeId, fileName);
   }
 
+  openFile2(employeeId: string, idFalta: number, urlArchivo: string) {
+    this.nombreArch = this.obtenerNombreArchivo(urlArchivo);
+    this.empleadoService.openFile3(employeeId, idFalta, this.nombreArch);
+  }
+
+  obtenerNombreArchivo(rutaArchivo: string): string {
+    const partesRuta = rutaArchivo.split('/');
+    return partesRuta[partesRuta.length - 1];
+  }
+
+  
+
+
   deleteFile(employeeId: string, fileName: string) {
     // Call the service method to delete the file
     this.empleadoService.deleteFile(employeeId, fileName).subscribe(
@@ -199,6 +227,12 @@ export class EditarComponent implements OnInit {
     this.getEmployeeFiles();
     this.router.navigate(['editar',id]);
   }
+
+  obtenerUrlSegura(url: string): SafeUrl {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
+
+  
        
   }
 

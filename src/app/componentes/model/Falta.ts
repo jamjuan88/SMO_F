@@ -1,7 +1,7 @@
 import { Empleado } from "src/app/empleado";
 
 export class Falta{
-    id:number;
+    idFalta:number;
     fechaFaltaInicio:Date;
     fechaFaltaFinal:Date;
     descripcionFalta:string;

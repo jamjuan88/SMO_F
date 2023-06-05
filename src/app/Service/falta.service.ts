@@ -10,7 +10,7 @@ export class FaltaService {
 
    //Esta es la URL del backend de listar todos los empleados
    private baseURL = "http://localhost:8080/faltas";
-   private baseURL2 = "http://localhost:8080/faltas/faltas"
+  
 
   constructor(private httpClient : HttpClient) { }
 
@@ -19,17 +19,29 @@ export class FaltaService {
   return this.httpClient.post(`${this.baseURL}`,falta);
 }
 
-guardarFaltaConArchivo(file: File, falta: any): Observable<any> {
-  const formData = new FormData();
-  formData.append('file', file);
-  formData.append('falta', falta);
-
-  return this.httpClient.post(`${this.baseURL2}`, formData);
+guardarFaltaConArchivo(falta: Falta, archivo: File, nombreArchivo: string): Observable<Object> {
+  const formData: FormData = new FormData();
+  formData.append('archivo', archivo, nombreArchivo); // El tercer parámetro es el nombre completo del archivo, incluyendo la extensión
+  formData.append('faltaId', falta.idFalta.toString());
+  formData.append('nombreArchivo', nombreArchivo);
+  
+  return this.httpClient.post(`${this.baseURL}/upload2`, formData);
 }
- 
+
+guardarFaltaConArchivo2(falta: Falta, archivo: File, nombreArchivo: string, extensionArchivo: string): Observable<Object> {
+  const formData: FormData = new FormData();
+  formData.append('archivo', archivo, nombreArchivo); // El tercer parámetro es el nombre completo del archivo, incluyendo la extensión
+  formData.append('faltaId', falta.idFalta.toString());
+  formData.append('nombreArchivo', nombreArchivo);
+  formData.append('extensionArchivo', extensionArchivo); // pasando la extension al servidor
+
+  return this.httpClient.post(`${this.baseURL}/upload2`, formData);
+}
+
+
 //este metodo es para eliminar una falta
-eliminarFalta(id:number): Observable<Object>{
-  return this.httpClient.delete(`${this.baseURL}/${id}`);
+eliminarFalta(idFalta:number): Observable<Object>{
+  return this.httpClient.delete(`${this.baseURL}/${idFalta}`);
 }
 
  //este metodo nos permite obtener las faltas
@@ -39,20 +51,21 @@ eliminarFalta(id:number): Observable<Object>{
 
 //este metodo es para obtener o buscar una falta
 obtenerFaltasPorEmpleado(id: number): Observable<Falta[]> {
-  return this.httpClient.get<Falta[]>(`${this.baseURL}/empleado/${id}`);
+return this.httpClient.get<Falta[]>(`${this.baseURL}/empleado/${id}`);
 }
 
 //este metodo es para obtener falta por id
-obtenerFaltaPorId(id: number): Observable<Falta> {
-  return this.httpClient.get<Falta>(`${this.baseURL}/${id}`);
+obtenerFaltaPorId(idFalta: number): Observable<Falta> {
+  return this.httpClient.get<Falta>(`${this.baseURL}/${idFalta}`);
 }
 
 //este metodo sirve para actualizar los datos de un puesto
 actualizarFalta(falta:Falta){
-  return this.httpClient.put<Falta>(this.baseURL+"/"+falta.id,falta);
+  return this.httpClient.put<Falta>(this.baseURL+"/"+falta.idFalta,falta);
 }
 
+
+
+
+
 }
-
-
-

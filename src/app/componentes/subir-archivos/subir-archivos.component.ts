@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Empleado } from 'src/app/empleado';
 import { EmpleadoService } from 'src/app/empleado.service';
+import { Falta } from '../model/Falta';
+import { FaltaService } from 'src/app/Service/falta.service';
 
 @Component({
   selector: 'app-subir-archivos',
@@ -16,16 +18,27 @@ export class SubirArchivosComponent implements OnInit {
   progressInfos: any[] = [];
   message: string[] = [];
   id:number;
+  falta : Falta = new Falta();
+  faltas: Falta[] = [];
+  // Objeto para almacenar los valores del formulario
+  file: File;
+  fechaFaltaInicio: string = '';
+  fechaFaltaFinal: string = '';
+  descripcionFalta: string = '';
+  tipoFalta: string = '';
+
 
   fileToUpload: File;
   employeeId = '';
   fileName = '';
-  empleado: Empleado[] = [];
-  empleados: Empleado = new Empleado();
-
+  empleados:Empleado[] = [];
+  empleado:Empleado[];
+  empleadoo:Empleado;
+  
   constructor(private empleadoService: EmpleadoService,
     private router: Router,
-    private route:ActivatedRoute) { }
+    private route:ActivatedRoute,
+    private faltaService: FaltaService) { }
 
   ngOnInit(): void {
     this.Editar();
@@ -37,15 +50,15 @@ export class SubirArchivosComponent implements OnInit {
     
   }
 
-  selectFile(event: any): void {
-    const target = event.target as HTMLInputElement;
-    this.selectedFiles = target.files;
-  }
+  
 
   handleFileInput(event: Event) {
     const target = event.target as HTMLInputElement;
-    this.fileToUpload = target.files.item(0);
+    if (target.files && target.files.length > 0) {
+      this.fileToUpload = target.files[0];
+    }
   }
+  
 
   uploadFile() {
     const originalFileName = this.fileToUpload.name;
@@ -59,7 +72,7 @@ export class SubirArchivosComponent implements OnInit {
         } else if (event instanceof HttpResponse) {
           this.message.push(event.body.message);
         }
-        
+      this.ngOnInit();  
       this.irDetallesEmpleado(this.id);
       },
       err => {
@@ -88,7 +101,7 @@ export class SubirArchivosComponent implements OnInit {
     let id=localStorage.getItem('id');
     this.empleadoService.obtenerEmpleadoPorId(+id)
     .subscribe(data => {
-      this.empleados=data;
+      this.empleadoo=data;
     });
  }
  

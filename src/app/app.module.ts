@@ -30,6 +30,7 @@ import { NgModule } from '@angular/core';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +50,7 @@ import { NgModule } from '@angular/core';
     SubirArchivosComponent,
     RegistrarEstadoEmplComponent,
     EditEstadoEmplComponent,
+    
    
     
     ],

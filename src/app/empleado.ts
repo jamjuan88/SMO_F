@@ -1,3 +1,4 @@
+import { Categoria } from "./componentes/model/Categoria";
 import { Empresa } from "./componentes/model/Empresa";
 import { EstadoLaboral} from "./componentes/model/EstadoLaboral";
 import { Falta } from "./componentes/model/Falta";
@@ -18,7 +19,7 @@ export class Empleado {
     genero:string;
     antecedentes:string;
     fechaRegistro:Date;   
-    tipoPersona:string;
+    categoria:Categoria;
     fotoPerfil:string; 
     empresa: Empresa;
     puesto: Puesto;

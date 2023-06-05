@@ -42,7 +42,7 @@ export class FaltasEditComponent implements OnInit {
         .subscribe(data => {
           this.faltas=data;
           alert("Se actualizo los datos de la Falta");
-          this.router.navigate(['home'])
+          this.router.navigate(['faltas'])
   
         });
      }

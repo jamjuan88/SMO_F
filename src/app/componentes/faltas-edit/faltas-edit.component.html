@@ -8,14 +8,13 @@
   <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
     <p>
     <label>Fecha Inicial:</label>
-    <input type="date" class="form-control" [(ngModel)]= "faltas.fechaFaltaInicio" name="fechaFalta">
+    <input type="date" class="form-control" [(ngModel)]= "faltas.fechaFaltaInicio" name="fechaFaltaInicio">
   </p>
 
   <p>
   <label>Fecha Final:</label>
-  <input type="date" class="form-control" [(ngModel)]= "faltas.fechaFaltaFinal" name="fechaFalta">
+  <input type="date" class="form-control" [(ngModel)]= "faltas.fechaFaltaFinal" name="fechaFaltaFinal">
 </p>
-
 </div>
 
 <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
@@ -47,7 +46,7 @@
       </p>
     </div>
 
-    <button (click)="Actualizar(faltas.id)" class="btn btn-success">Actualizar</button>
+    <button (click)="Actualizar(faltas.idFalta)" class="btn btn-success">Actualizar</button>
   </div>
 
   </form>

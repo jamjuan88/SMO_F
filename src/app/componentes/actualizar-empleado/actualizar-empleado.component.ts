@@ -8,6 +8,8 @@ import { PuestoService } from 'src/app/Service/puesto.service';
 import { Puesto } from '../model/Puesto';
 import { EstadoLaboral } from '../model/EstadoLaboral';
 import { EstadoEmplService } from 'src/app/Service/estado-empl.service';
+import { Categoria } from '../model/Categoria';
+import { CategoriaService } from 'src/app/Service/categoria.service';
 
 @Component({
   selector: 'app-actualizar-empleado',
@@ -20,13 +22,17 @@ export class ActualizarEmpleadoComponent implements OnInit {
   puestos: Puesto[];
   estados: EstadoLaboral[];
   empleados: Empleado[];
+  empleadoId: number;
   empleado: Empleado = new Empleado();
+  categoria : Categoria;
+  categorias: Categoria[] = [];
   
   
   constructor(private router: Router, 
     private empleadoService: EmpleadoService,
     private empresaService: EmpresaService,
     private estadoService: EstadoEmplService,
+    private categoriaService: CategoriaService,
     private puestoService: PuestoService) { }
 
   ngOnInit(): void {
@@ -34,6 +40,7 @@ export class ActualizarEmpleadoComponent implements OnInit {
     this.empresaService.comboEmpresa().subscribe(empresas => {this.empresas = empresas});
     this.puestoService.comboPuestos().subscribe(puestos => {this.puestos = puestos});
     this.estadoService.comboEstados().subscribe(estados => {this.estados = estados});
+    this.categoriaService.comboCategoria().subscribe(response => {this.categorias = response});
    }
  
    private obtenerEmpleados(){
@@ -65,7 +72,9 @@ export class ActualizarEmpleadoComponent implements OnInit {
       .subscribe(data => {
         this.empleado=data;
         alert("Se actualizo los datos del empleado");
-        this.router.navigate(['home'])
+        this.empleadoId = this.empleado.id; 
+        this.router.navigate(['editar', this.empleadoId]);
+        
 
       });
    }

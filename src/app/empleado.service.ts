@@ -1,4 +1,4 @@
-import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Empleado } from './empleado';
@@ -11,8 +11,7 @@ export class EmpleadoService {
 
   //Esta es la URL del backend de listar todos los empleados 
   private baseURL = "http://localhost:8080/api/v1/empleados"; 
-  private baseURL2 = "http://localhost:8080/faltas"; 
-
+ 
 
   constructor(private httpClient : HttpClient) { }
 
@@ -57,8 +56,6 @@ export class EmpleadoService {
     return this.httpClient.request(req);
 }
 
-   
-
 
 
 
@@ -70,10 +67,31 @@ export class EmpleadoService {
     return this.httpClient.get<string[]>(`${this.baseURL}/files/${employeeId}`);
   }
 
+  
+
   openFile(employeeId: string, fileName: string) {
     const fileUrl = `${this.baseURL}/files/${employeeId}/${fileName}`;
-    window.open(fileUrl);
+    window.location.href = fileUrl;
   }
+
+  openFile2(employeeId: string, idFalta: number, fileName: string) {
+    const fileUrl = `${this.baseURL}/files/${employeeId}/${idFalta}/${fileName}`;
+    window.location.href = fileUrl;
+  }
+
+  openFile3(employeeId: string, idFalta: number, nombreArch: string) {
+    const fileUrl = `${this.baseURL}/archivosFalta/${employeeId}/${idFalta}/${nombreArch}`;
+    window.location.href = fileUrl;
+  }
+
+ 
+
+  
+  
+  
+  
+
+ 
 
   deleteFile(employeeId: string, fileName: string): Observable<any> {
     const url = `${this.baseURL}/files/${employeeId}/${fileName}`;

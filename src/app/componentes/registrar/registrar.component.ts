@@ -8,6 +8,8 @@ import { Puesto } from '../model/Puesto';
 import { PuestoService } from 'src/app/Service/puesto.service';
 import { EstadoLaboral } from '../model/EstadoLaboral';
 import { EstadoEmplService } from 'src/app/Service/estado-empl.service';
+import { Categoria } from '../model/Categoria';
+import { CategoriaService } from 'src/app/Service/categoria.service';
 
 @Component({
   selector: 'app-registrar',
@@ -21,6 +23,8 @@ export class RegistrarComponent implements OnInit {
   edad:number;
   empresa : Empresa;
   empresas: Empresa[] = [];
+  categoria : Categoria;
+  categorias: Categoria[] = [];
   puesto: Puesto;
   puestos: Puesto[] = [];
   estadoLaboral: EstadoLaboral;
@@ -32,13 +36,16 @@ export class RegistrarComponent implements OnInit {
     private router: Router,
     private empresaService: EmpresaService,
     private puestoService: PuestoService,
+    private categoriaService: CategoriaService,
     private estadoService: EstadoEmplService
+
     ) { }
 
   ngOnInit(): void {
    this.estadoService.obtenerListaDeEstados().subscribe(response => {this.estadosLaboral = response}); 
    this.empresaService.comboEmpresa().subscribe(response => {this.empresas = response});
-   this.puestoService.comboPuestos().subscribe(response => {this.puestos = response});   
+   this.puestoService.comboPuestos().subscribe(response => {this.puestos = response});
+   this.categoriaService.comboCategoria().subscribe(response => {this.categorias = response}); 
   }
 
   guardarEmpleado(){

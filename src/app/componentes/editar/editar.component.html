@@ -55,7 +55,7 @@
         </div>
 
         <div>
-            <label><b>Categoría:</b> {{empleado.tipoPersona}}</label>
+            <label><b>Categoría:</b> {{empleado.categoria.nombreCategoria}}</label>
         </div>
  
           <div class="direccion-container">
@@ -66,32 +66,52 @@
 
         <div>
             <label><b>Fecha de Ingreso:</b> {{empleado.fechaIngreso}} &nbsp; <b>Tiempo en la empresa:</b> {{ tiempo2 }} &nbsp; <b>Periodos con faltas:</b> {{ cantidadFaltas }} </label> 
-           <label><b>Cantidad Total de Días Faltados: {{cantidadFaltasDias}}</b></label>
+           <label><b>Cantidad Total de Días Faltados: {{cantidadFaltasDias}}</b> &nbsp; <b>Antecedentes Médicos: </b>{{empleado.antecedentes}}</label>
+          
         </div>
 
-        
-        
-        <div>
-            <h1>Antecedentes Médicos</h1>
-           
-        </div>
-
-        <P class="parrafo">{{empleado.antecedentes}}
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque voluptatem similique ad fuga eligendi aliquam odio quia deleniti tempora. Doloribus unde, reprehenderit quasi fugit accusamus consequuntur dignissimos minus porro animi!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum molestiae sed, doloremque aliquid velit ea rerum est rem molestias ducimus illum soluta eos, tempora eaque sint ut eveniet accusantium error.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse ab maiores doloremque facere magni modi eligendi nam temporibus fugiat omnis dolorum rem odit labore veritatis, repellat rerum placeat aut ad!
-        </P>
     </div>
 
    
     <div >
         <button (click)="editarEmpleado(empleado.id)" class="btnEdit">Editar</button>
    </div>
-    
+     </div>
 
-   
 
+    <h1>Antecedentes Médicos</h1>
+    <div class="container3">   
+       
+            <table class="table2 divided-table">         
+                <thead>
+                    <tr>
+                        <th style="width: 9%">Aptitup</th>
+                        <th style="width: 9%">Preexistencia</th>
+                        <th colspan="3" style="width: 37%">Descripcion Aptitup</th>
+                        <th style="width: 9%">Nombre Proveedor</th>
+                        <th style="width: 9%">Localidad Proveedor</th>
+                        <th style="width: 9%">Nombre Medico del Proveedor</th>
+                        <th style="width: 9%">Matricula del Médico</th>
+                        <th style="width: 9%">Examen de Ingreso</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let antecedente of antecedentes" > 
+                        <td style="width: 9%">{{antecedente.aptitudes.nombreAptitud}}</td>
+                        <td style="width: 9%">Culpable</td>
+                        <td colspan="3" style="width: 37%">{{antecedente.aptitudes.descripcionAptitud}}</td>
+                        <td style="width: 9%">{{antecedente.proveedoresAptitudes.nombreProveedorAptitud}}</td>
+                        <td style="width: 9%">{{antecedente.proveedoresAptitudes.localidadProveedorAptitud}}</td>
+                        <td style="width: 9%">{{antecedente.medicosProveedor.nombreMedicoProveedor}}</td>
+                        <td style="width: 9%">{{antecedente.medicosProveedor.matriculaMedicoProveedor}}</td>
+                        <td style="width: 9%"><a href="#">Archivo.pdf</a></td>
+                    </tr>  
+                 </tbody>
+            </table>
     </div>
+
+
 
 
 <h1>Archivos del candidato</h1>
@@ -125,16 +145,24 @@
                       <th scope="col">Fecha Inicial de La Falta </th>
                       <th scope="col">Fecha de Reincorporación</th>
                       <th scope="col">Dias Faltados</th>
+                      <th scope="col">Archivos</th>
+                      
+                      
                                          
                   </tr>
               </thead>
               <tbody>
-                  <tr *ngFor="let falta of faltas"> 
+                  <tr *ngFor="let falta of faltas" > 
                       <td>{{falta.tipoFalta}}</td>
                       <td>{{falta.descripcionFalta}}</td>
                       <td>{{MostrarFechaInversa(falta.fechaFaltaInicio)}}</td>
                       <td>{{MostrarFechaInversa(falta.fechaFaltaFinal)}}</td>
                       <td>{{calcularDias(falta.fechaFaltaInicio , falta.fechaFaltaFinal)}} </td>
+                      <td>
+                       <span class="file-link" (click)="openFile2(employeeId, falta.idFalta, falta.urlArchivo)">{{ obtenerNombreArchivo(falta.urlArchivo) }}</span>
+                      </td>
+                      
+                     
 
                 </tr>  
                            

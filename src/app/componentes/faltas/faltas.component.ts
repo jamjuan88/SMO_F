@@ -4,6 +4,7 @@ import { Falta } from '../model/Falta';
 import { Router } from '@angular/router';
 import { Empleado } from 'src/app/empleado';
 import { EmpleadoService } from 'src/app/empleado.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-faltas',
@@ -14,21 +15,42 @@ export class FaltasComponent implements OnInit {
 
   @ViewChild('fileInput', { static: false }) fileInput: ElementRef<HTMLInputElement>;
 
-  id:number;
-  selectedFile: File;
+ 
+  public archivoSeleccionado: File;
+
+  idFalta:number;
   file: File | null = null;
   falta2 : Falta = new Falta();
   faltas2: Falta[] = [];
-  falta : Falta = new Falta();
+  
   faltas: Falta[] = [];
   empleados:Empleado[] = [];
   empleado:Empleado[];
   empleadoo:Empleado;
   term: string;
+  urlArchivo: string;
+  nombreArchivo: string; 
+  extensionArchivo: string;
+  nombreArch:string;
+  employeeId = '';
+
+  falta: Falta = {
+    idFalta: null,
+    fechaFaltaInicio: null,
+    fechaFaltaFinal: null,
+    tipoFalta: null,
+    urlArchivo: null,
+    descripcionFalta: null,
+    empleado: null
+  };
+
+ 
+  
 
 
   constructor(private faltaService: FaltaService,
     private router: Router,
+    private sanitizer: DomSanitizer,
     private empleadoService: EmpleadoService) { }
 
   ngOnInit(): void {
@@ -46,30 +68,67 @@ export class FaltasComponent implements OnInit {
     },error => console.log(error));
   }
 
-  guardarFaltaConArchivo(falta: any) {
-    const file = this.fileInput.nativeElement.files[0];
-    
-
-    this.faltaService.guardarFaltaConArchivo(file, falta).subscribe(
-      (response) => {
-        // La falta y el archivo se guardaron correctamente
-        console.log('Falta y archivo guardados correctamente');
-      },
-      (error) => {
-        // Ocurrió un error al guardar la falta y el archivo
-        console.error('Error al guardar la falta y el archivo:', error);
-      }
-    );
-  }
-    
-
-  onFileSelected(input: HTMLInputElement) {
-    if (input.files && input.files.length > 0) {
-      const file: File = input.files[0];
-      // Aquí puedes realizar las operaciones necesarias con el archivo
+  guardarFalta2() {
+    // Validar que se haya seleccionado un archivo
+    if (!this.archivoSeleccionado) {
+      // Mostrar mensaje de error o realizar alguna acción apropiada
+      return;
     }
+
+    this.faltaService.guardarFalta(this.falta).subscribe(
+      (faltaGuardada: Falta) => {
+        // Obtener el ID de la falta guardada
+        const faltaId = faltaGuardada.idFalta;
+
+        // Asignar el ID de la falta al objeto falta
+        this.falta.idFalta = faltaId;
+
+        // Realizar la solicitud de carga con el ID obtenido
+        this.faltaService.guardarFaltaConArchivo2(this.falta, this.archivoSeleccionado, this.nombreArchivo, this.extensionArchivo).subscribe(
+          response => {
+                   
+            // Lógica adicional después de guardar la falta y el archivo
+            console.log('Falta y archivo guardados correctamente');
+            // Realizar cualquier otra acción necesaria, como redirigir a otra página
+          },
+          error => {
+            // Manejo de errores
+            console.error('Error al guardar la falta y el archivo:', error);
+          }
+        );
+      },
+      
+      error => {
+        // Manejo de errores al guardar la falta
+        console.error('Error al guardar la falta:', error);
+      }
+     );
+     
+   }
+  
+  
+  obtenerUrlSegura(url: string): SafeUrl {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
+
+  obtenerNombreArchivo(rutaArchivo: string): string {
+    const partesRuta = rutaArchivo.split('/');
+    return partesRuta[partesRuta.length - 1];
   }
   
+  
+
+  onFileSelected(event: any) {
+    this.archivoSeleccionado = event.target.files[0];
+    this.nombreArchivo = this.archivoSeleccionado.name;
+    const extension = this.archivoSeleccionado.name.split('.').pop(); // Obtener la extensión del archivo
+    this.extensionArchivo = extension;
+  }
+
+  openFile2(employeeId: number, idFalta: number, urlArchivo: string) {
+    this.nombreArch = this.obtenerNombreArchivo(urlArchivo);
+    this.empleadoService.openFile3(employeeId.toString(), idFalta, this.nombreArch);
+  }
   
 
   MostrarFechaInversa(fechaInicioFalta: Date): string {
@@ -130,7 +189,3 @@ export class FaltasComponent implements OnInit {
 
 
 }
-  
-
-
-

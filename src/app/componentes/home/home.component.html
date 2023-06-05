@@ -9,7 +9,7 @@
                         <th scope="col">nombre</th>
                         <th scope="col">apellido</th>
                         <th scope="col">dni</th>
-                        <th scope="col">tipo de Persona</th>
+                        <th scope="col">Categoria</th>
                         <th scope="col">Empresas</th>
                         <th></th>
                         <th></th>
@@ -22,7 +22,7 @@
                         <td>{{empleado.nombre}}</td>
                         <td>{{empleado.apellido}}</td>
                         <td>{{empleado.dni}}</td>
-                        <td>{{empleado.tipoPersona}}</td> 
+                        <td>{{empleado.categoria.nombreCategoria}}</td> 
                         <td>{{empleado.empresa.nombreEmpresa}}</td>                           
                          <td>                    
                             <button (click)="verDetallesEmpleado(empleado.id)" class="btn btn-success" type="submit">Ver Detalles</button>

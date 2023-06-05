@@ -17,6 +17,13 @@
     
     }
 
+    .divided-table th,
+    .divided-table td {
+      padding: 8px;
+      border: 1px solid #0e0c0c;
+      text-align: center;
+    }
+
 .container3{
   display: flex;
   justify-content: center;
@@ -25,13 +32,20 @@
   margin-left: auto;
   margin-right: auto;
    background-color: #35f6bf;
-   margin-bottom: 100px;
+   
   }
 
 .table2{
     width: 100% !important;
 }
    
+.file-link {
+  cursor: pointer;
+  text-decoration: underline;
+  color: blue;
+}
+
+
 form {
     width: 100%;
     background-color: white;
