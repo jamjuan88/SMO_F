@@ -22,6 +22,16 @@ export class AntecedentesService {
   guardarAntecedentesEmpleado(antecedentesEmpleado:AntecedentesEmpleado): Observable<Object>{
     return this.httpClient.post(`${this.baseURL}`,antecedentesEmpleado);
   }
+
+  guardarAntecedentesEmpleadoConArchivo(antecedentesEmpleado: AntecedentesEmpleado, archivo: File, nombreArchivo: string, extensionArchivo: string): Observable<Object> {
+    const formData: FormData = new FormData();
+    formData.append('archivo', archivo, nombreArchivo); // El tercer parámetro es el nombre completo del archivo, incluyendo la extensión
+    formData.append('antecedentesId', antecedentesEmpleado.idAntecedentes.toString());
+    formData.append('nombreArchivo', nombreArchivo);
+    formData.append('extensionArchivo', extensionArchivo); // pasando la extension al servidor
+  
+    return this.httpClient.post(`${this.baseURL}/upload2`, formData);
+  }
   
   //este metodo es para obtener o buscar una falta
   obtenerAntecedentesPorEmpleado(id: number): Observable<AntecedentesEmpleado[]> {
@@ -47,6 +57,13 @@ export class AntecedentesService {
   comboAntecedentes(): Observable<AntecedentesEmpleado[]>{
     return this.httpClient.get<AntecedentesEmpleado[]>(`${this.baseURL}`);
   }
+
+  openFile3(employeeId: string, idAntecedentes: number, nombreArch: string) {
+    const fileUrl = `${this.baseURL}/archivosAntecedentes/${employeeId}/${idAntecedentes}/${nombreArch}`;
+    window.location.href = fileUrl;
+  }
+
+  
 
 
 

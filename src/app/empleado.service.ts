@@ -41,6 +41,10 @@ export class EmpleadoService {
     return this.httpClient.delete(`${this.baseURL}/${id}`);
   }
 
+  comboDeEmpleados():Observable<Empleado[]>{
+    return this.httpClient.get<Empleado[]>(`${this.baseURL}`);
+  }
+
   upload(file: File, employeeId: string, fileName: string): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
 
@@ -84,14 +88,7 @@ export class EmpleadoService {
     window.location.href = fileUrl;
   }
 
- 
-
   
-  
-  
-  
-
- 
 
   deleteFile(employeeId: string, fileName: string): Observable<any> {
     const url = `${this.baseURL}/files/${employeeId}/${fileName}`;

@@ -1,0 +1,27 @@
+<div class="container">
+<h1>Registrar Categoría</h1>
+<form enctype="multipart/form-data" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col">
+            <p>
+                <label for="nombreCategoria">Nombre de la Categoría:</label>
+                <input type="text" class="form-control" id="nombreCategoria" [(ngModel)]="categoria.nombreCategoria" name="nombreCategoria" required>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <p>
+                <label for="descripcionCategoria">Descripcion de la Categoria</label>
+                <input type="text" class="form-control" id="nombre" [(ngModel)]="categoria.descripcionCategoria" name="descripcionCategoria" required>
+            </p>
+        </div>
+    </div>   
+    <div>
+        <p class="btn2 form-group">
+            <button class="btn btn-success" type="submit">Registrar</button>
+        </p>
+        </div>
+</form>
+</div>
+

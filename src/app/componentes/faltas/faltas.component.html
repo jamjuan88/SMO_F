@@ -22,6 +22,7 @@
           <p>
             <label>Tipo de Falta:</label>
             <select [(ngModel)]="falta.tipoFalta" name="tipo">
+              <option [ngValue]="undefined"> - seleccionar Tipo de Falta - </option>
               <option value="ENFERMEDAD">Enfermedad</option>
               <option value="SIN_CAUSA">Sin causa</option>
               <option value="POR_LUTO">Por Luto</option>
@@ -92,30 +93,34 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let falta of faltas | filter: term">
-                <td>{{ falta.empleado.nombre }} {{ falta.empleado.apellido }}</td>
-                <td>{{ falta.tipoFalta }}</td>
-                <td>{{ falta.descripcionFalta }}</td>
-                <td>{{ MostrarFechaInversa(falta.fechaFaltaInicio) }}</td>
-                <td>{{ MostrarFechaInversa(falta.fechaFaltaFinal) }}</td>
-                <td>{{ calcularDias(falta.fechaFaltaInicio, falta.fechaFaltaFinal) }}</td>
-                <td>
-                  <span class="file-link" (click)="openFile2(falta.empleado.id, falta.idFalta, falta.urlArchivo)">{{ obtenerNombreArchivo(falta.urlArchivo) }}</span>
-                </td>
-                <td>
-                    <button (click)="verDetallesEmpleado(falta.empleado.id)" class="btn btn-success"
-                        type="submit">Ver Detalles</button>
-                </td>
-                <td>
-                    <button (click)="editarFalta(falta.idFalta)" class="btn btn-success" type="submit">Editar</button>
-                </td>
-                <td>
-                    <button (click)="eliminarFalta(falta.idFalta)" class="btn btn-success" type="submit">Eliminar</button>
-                </td>
-            </tr>
+            <ng-container *ngFor="let falta of faltas | filter: term; let first = first">
+                <tr [ngClass]="{'blue-row': first }">
+                 
+                    <td>{{ falta.empleado.nombre }} {{ falta.empleado.apellido }}</td>
+                    <td>{{ falta.tipoFalta }}</td>
+                    <td>{{ falta.descripcionFalta }}</td>
+                    <td>{{ MostrarFechaInversa(falta.fechaFaltaInicio) }}</td>
+                    <td>{{ MostrarFechaInversa(falta.fechaFaltaFinal) }}</td>
+                    <td>{{ calcularDias(falta.fechaFaltaInicio, falta.fechaFaltaFinal) }}</td>
+                    <td>
+                      <span class="file-link" (click)="openFile2(falta.empleado.id, falta.idFalta, falta.urlArchivo)">{{ obtenerNombreArchivo(falta.urlArchivo) }}</span>
+                    </td>
+                    <td>
+                        <button (click)="verDetallesEmpleado(falta.empleado.id)" class="btn btn-success"
+                            type="submit">Detalles</button>
+                    </td>
+                    <td>
+                        <button (click)="editarFalta(falta.idFalta)" class="btn btn-success" type="submit">Editar</button>
+                    </td>
+                    <td>
+                        <button (click)="eliminarFalta(falta.idFalta)" class="btn btn-success" type="submit">Eliminar</button>
+                    </td>
+                </tr>
+            </ng-container>
         </tbody>
     </table>
 </div>
+
 
 
   

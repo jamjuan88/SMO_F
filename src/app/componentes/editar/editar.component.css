@@ -17,12 +17,21 @@
     
     }
 
-    .divided-table th,
-    .divided-table td {
+.divided-table th,
+.divided-table td {
       padding: 8px;
       border: 1px solid #0e0c0c;
       text-align: center;
     }
+
+.top-table {
+      margin-bottom: 20px; /* Espacio entre las dos secciones */
+  }
+  
+.bottom-buttons {
+      text-align: center; /* Centrar los botones horizontalmente */
+  }
+  
 
 .container3{
   display: flex;
@@ -34,6 +43,20 @@
    background-color: #35f6bf;
    
   }
+
+ .col{
+  margin: 5px;
+ }
+
+  .container4{
+    display: flex;
+    justify-content: center;
+    max-width: 1300px; /* Cambia el valor según tus necesidades */
+    margin-left: auto;
+    margin-right: auto;
+     background-color: #35f6bf;
+     
+    }
 
 .table2{
     width: 100% !important;
@@ -142,6 +165,10 @@ form {
     background-color: red;
   }
 
+  .btneedit{
+    background-color: rgb(46, 32, 232);
+  }
+
   .btnAct{
     background-color: chartreuse;
   }
@@ -189,7 +216,9 @@ form {
   font-size: 25px; /* Cambia el tamaño de la letra según tus necesidades */
 }
 
-
+.btnDelete{
+  background-color: rgb(255, 0, 0);
+}
 
 
 

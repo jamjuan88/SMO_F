@@ -1,0 +1,114 @@
+<H1>Registro de Antecedendes: 
+  <div class="text-center">
+    <h2>{{ empleado }}</h2>
+  </div>
+</H1>
+
+
+
+
+
+<div class="enmarcado">
+  <form enctype="multipart/form-data" (ngSubmit)="guardarAntecedentes2()" >
+  <div class="row">    
+     <div class="row">
+
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+            <p>
+              <label for="aptitud">Aptitud:</label>
+              <select [(ngModel)]="antecedente.aptitudes"  id="aptitud" name="aptitud">
+                <option value="undefined"> --- seleccionar aptitud --- </option>
+                <option *ngFor="let aptitud of aptitudes" [ngValue]= "aptitud">{{ aptitud.nombreAptitud }}</option>
+              </select>
+            </p>
+          </div>
+
+         
+
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+            <p>
+              <label for="tipoPreexistencia">Tipo de Preexistencia:</label>
+              <select [(ngModel)]="antecedente.tipoPreexistencia" id="tipoPreexistencia" name="tipoPreexistencia">
+                <option [ngValue]="undefined"> --- seleccionar Tipo Preexistencia --- </option>
+                <option *ngFor="let tipoPreexistencia of tipoPreexistencias" [ngValue]= "tipoPreexistencia">{{ tipoPreexistencia.nombreTipoPreexistencia }}</option>
+              </select>
+            </p>
+          </div>
+
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+            <p>
+              <label for="preexistencias">Preexistencias:</label>
+              <select [(ngModel)]="antecedente.preexistencias" id="preexistencias" name="preexistencias">
+                <option [ngValue]="undefined"> --- seleccionar Preexistencia --- </option>
+                <option *ngFor="let preexistencia of preexistencias" [ngValue]= "preexistencia">{{ preexistencia.nombrePreexistencia }}</option>
+              </select>
+            </p>
+          </div>
+
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+            <p>
+              <label for="proveedoresAptitudes">Proveedores Aptitudes:</label>
+              <select [(ngModel)]="antecedente.proveedoresAptitudes" id="proveedoresAptitudes" name="proveedoresAptitudes">
+                <option [ngValue]="undefined"> --- Seleccionar Preexistencia --- </option>
+                <option *ngFor="let proveedoresAptitud of proveedoresAptitudes" [ngValue]="proveedoresAptitud">{{ proveedoresAptitud.nombreProveedorAptitud }}</option>
+              </select>
+            </p>
+          </div>
+          
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+            <p *ngIf="antecedente.proveedoresAptitudes">
+              <label for="medicosProveedor">Médicos Proveedores:</label>
+              <select [(ngModel)]="antecedente.medicosProveedor" id="medicosProveedor" name="medicosProveedor">
+                <option [ngValue]="undefined"> --- Seleccionar Médico Proveedor --- </option>
+                <option *ngFor="let medico of getMedicosByProveedor(antecedente.proveedoresAptitudes)" [ngValue]="medico">{{ medico.nombreMedicoProveedor }}</option>
+              </select>
+            </p>
+          </div>
+          
+
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group" hidden>
+            <p>
+              <label for="empleado">Empleado:</label>
+              <input type="text" [(ngModel)]= "empleado" id="empleado" name="empleado" readonly>
+            </p>
+          </div>
+          
+          
+          
+               
+
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+          <p>
+            <label>Constancia Aptitud Examen Ingreso:</label>
+            <input type="file" name="archivo" (change)="onFileSelected($event)">
+            <input type="hidden" [(ngModel)]="extensionArchivo" name="extensionArchivo">
+          </p>
+        </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+          <p>
+            <label>Nombre de archivo:</label>
+            <input type="text" placeholder="nombre del archivo sin la extensión" [(ngModel)]="nombreArchivo" name="nombreArchivo">
+        </p>          
+        </div> 
+        
+          
+          <div class="col-xs-12 form-group">
+            <p>
+              <label>Descripción de la Aptitud:</label>
+              <textarea id="descripcionPreexistencia" [(ngModel)]="antecedente.descripcionPreexistencia" name="descripcionPreexistencia"></textarea>
+            </p>
+          </div>
+     
+      </div>
+      
+      <div ngForm #faltaForm>
+        <p class="btn2 col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+            <button class="btn btn-success" type="submit">Registrar</button>
+        </p>
+        </div>
+
+    
+  </div>
+</form>
+</div>

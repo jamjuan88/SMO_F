@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Empleado } from 'src/app/empleado';
 import { EmpleadoService } from 'src/app/empleado.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-faltas',
@@ -20,7 +21,7 @@ export class FaltasComponent implements OnInit {
 
   idFalta:number;
   file: File | null = null;
-  falta2 : Falta = new Falta();
+ 
   faltas2: Falta[] = [];
   
   faltas: Falta[] = [];
@@ -33,8 +34,9 @@ export class FaltasComponent implements OnInit {
   extensionArchivo: string;
   nombreArch:string;
   employeeId = '';
+  falta: Falta = new Falta();
 
-  falta: Falta = {
+  falta2: Falta = {
     idFalta: null,
     fechaFaltaInicio: null,
     fechaFaltaFinal: null,
@@ -55,7 +57,8 @@ export class FaltasComponent implements OnInit {
 
   ngOnInit(): void {
    this.empleadoService.obtenerListaDeEmpleados().subscribe(response => {this.empleados = response});
-   this.obtenerListaFaltas();
+   this.obtenerListaFaltas2();
+   
   }
 
    guardarFalta(){
@@ -74,19 +77,22 @@ export class FaltasComponent implements OnInit {
       // Mostrar mensaje de error o realizar alguna acción apropiada
       return;
     }
-
+  
     this.faltaService.guardarFalta(this.falta).subscribe(
       (faltaGuardada: Falta) => {
         // Obtener el ID de la falta guardada
         const faltaId = faltaGuardada.idFalta;
-
+  
         // Asignar el ID de la falta al objeto falta
         this.falta.idFalta = faltaId;
-
+  
         // Realizar la solicitud de carga con el ID obtenido
-        this.faltaService.guardarFaltaConArchivo2(this.falta, this.archivoSeleccionado, this.nombreArchivo, this.extensionArchivo).subscribe(
+        this.faltaService.guardarFaltaConArchivo2(this.falta, this.archivoSeleccionado, this.nombreArchivo, this.extensionArchivo).pipe(
+          finalize(() => {
+            location.reload();
+          })
+        ).subscribe(
           response => {
-                   
             // Lógica adicional después de guardar la falta y el archivo
             console.log('Falta y archivo guardados correctamente');
             // Realizar cualquier otra acción necesaria, como redirigir a otra página
@@ -97,14 +103,18 @@ export class FaltasComponent implements OnInit {
           }
         );
       },
-      
       error => {
         // Manejo de errores al guardar la falta
         console.error('Error al guardar la falta:', error);
       }
-     );
-     
-   }
+    );
+  }
+
+   irVistaDatosEmpleado(idEmpleado: number) {
+    this.router.navigate([`editar/${idEmpleado}`]);
+  }
+
+  
   
   
   obtenerUrlSegura(url: string): SafeUrl {
@@ -166,6 +176,13 @@ export class FaltasComponent implements OnInit {
       this.faltas = dato;
     })
   }
+
+  private obtenerListaFaltas2() {
+    this.faltaService.obtenerFaltas().subscribe(dato => {
+      this.faltas = dato.reverse(); // Aplicar el método reverse() al array antes de asignarlo a this.faltas
+    });
+  }
+  
 
   verDetallesEmpleado(id:number){
     this.router.navigate(['editar',id]);

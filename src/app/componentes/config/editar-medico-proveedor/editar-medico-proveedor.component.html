@@ -1,0 +1,39 @@
+<h1>Actualizar Médico Proveedor</h1>
+<form>
+    <div class="row">
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+            <p>
+                <label for="nombreMedicoProveedor">Nombre del Médico Proveedor:</label>
+                <input type="text" class="form-control" id="nombreMedicoProveedor" [(ngModel)]="medicoProveedor.nombreMedicoProveedor" name="nombreMedicoProveedor" required>
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+            <p>
+                <label for="matriculaMedicoProveedor">Matricula Médico Proveedor</label>
+                <input type="text" class="form-control" id="matriculaMedicoProveedor" [(ngModel)]="medicoProveedor.matriculaMedicoProveedor" name="matriculaMedicoProveedor" required>
+            </p>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+        <p>
+          <label for="proveedoresAptitudes">Proveedor de Aptitudes:</label>
+          <select [(ngModel)]= "medicoProveedor.proveedoresAptitudes.idProveedorAptitud" id="proveedoresAptitudes" name="proveedoresAptitudes">
+            <option [value]= "undefined"> {{medicoProveedor.proveedoresAptitudes.nombreProveedorAptitud}}</option>
+            <option *ngFor="let proveedor of proveedoresAptitudes" [value]= "proveedor.idProveedorAptitud">{{ proveedor.nombreProveedorAptitud }}</option>
+          </select>
+        </p>
+      </div>
+
+        <div>
+        <p class="btn2 col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+            <button (click)="ActualizarMedico(medicoProveedor.idMedicoProveedor)" class="btn btn-success">Actualizar</button>
+        </p>
+        </div>
+</form>
+
+
+

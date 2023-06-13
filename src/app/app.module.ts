@@ -27,6 +27,19 @@ import { MatCardModule } from '@angular/material/card';
 import { RegistrarEstadoEmplComponent } from './componentes/config/registrar-estado-empl/registrar-estado-empl.component';
 import { EditEstadoEmplComponent } from './componentes/config/edit-estado-empl/edit-estado-empl.component';
 import { NgModule } from '@angular/core';
+import { RegistrarCategoriaComponent } from './componentes/config/registrar-categoria/registrar-categoria.component';
+import { EditCategoriaComponent } from './componentes/config/edit-categoria/edit-categoria.component';
+import { RegistrarAntecedentesComponent } from './componentes/registrar-antecedentes/registrar-antecedentes.component';
+import { RegistrarAptitudComponent } from './componentes/config/registrar-aptitud/registrar-aptitud.component';
+import { EditarAptitudComponent } from './componentes/config/edit-aptitud/editar-aptitud.component';
+import { RegistrarMedicoProveedorComponent } from './componentes/config/registrar-medico-proveedor/registrar-medico-proveedor.component';
+import { EditarMedicoProveedorComponent } from './componentes/config/editar-medico-proveedor/editar-medico-proveedor.component';
+import { RegistrarTipoDePreexistenciaComponent } from './componentes/config/registrar-tipo-de-preexistencia/registrar-tipo-de-preexistencia.component';
+import { EditarrTipoDePreexistenciaComponent } from './componentes/config/editar-tipo-de-preexistencia/editarr-tipo-de-preexistencia.component';
+import { RegistrarPreexistenciaComponent } from './componentes/config/registrar-preexistencia/registrar-preexistencia.component';
+import { EditarPreexistenciaComponent } from './componentes/config/editar-preexistencia/editar-preexistencia.component';
+import { EditarAntecedentesComponent } from './componentes/editar-antecedentes/editar-antecedentes.component';
+
 
 
 
@@ -50,6 +63,19 @@ import { NgModule } from '@angular/core';
     SubirArchivosComponent,
     RegistrarEstadoEmplComponent,
     EditEstadoEmplComponent,
+    RegistrarCategoriaComponent,
+    EditCategoriaComponent,
+    RegistrarAntecedentesComponent,
+    RegistrarAptitudComponent,
+    EditarAptitudComponent,
+    RegistrarMedicoProveedorComponent,
+    EditarMedicoProveedorComponent,
+    RegistrarTipoDePreexistenciaComponent,
+    EditarrTipoDePreexistenciaComponent,
+    RegistrarPreexistenciaComponent,
+    EditarPreexistenciaComponent,
+    EditarAntecedentesComponent,
+  
     
    
     

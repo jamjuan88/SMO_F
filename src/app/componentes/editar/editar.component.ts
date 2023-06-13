@@ -77,6 +77,25 @@ export class EditarComponent implements OnInit {
     this.router.navigate(['actualizar-empleado',id]);
   }
 
+  editarAntecedentes(antecedente: AntecedentesEmpleado) {
+    if (antecedente && antecedente.idAntecedentes) {
+      localStorage.setItem("id", antecedente.idAntecedentes.toString());
+      this.router.navigate(['editarAntecedentes', antecedente.idAntecedentes]);
+    } else {
+      // El antecedente no está definido o no tiene un ID válido
+      // Realiza alguna acción apropiada, como mostrar un mensaje de error
+      console.error('No se puede editar el antecedente');
+    }
+  }
+
+  eliminarAntecedentes(idAntecedentes:number){
+    
+    this.antecedentesService.eliminarAntecedentesEmpleado(idAntecedentes).subscribe(dato =>{
+      console.log(dato);
+      this.obtenerListaAntecedentesPorEmpleado(this.empleado.id);       
+    })
+  }  
+
   calcularEdad(fechaNac: Date): number {
     const hoy = new Date();
     const fechaNacimientoObj = new Date(this.empleado.fechaNac);
@@ -201,6 +220,11 @@ export class EditarComponent implements OnInit {
     this.empleadoService.openFile3(employeeId, idFalta, this.nombreArch);
   }
 
+  openFile3(employeeId: number, idAntecedentes: number, urlArchivo: string) {
+    this.nombreArch = this.obtenerNombreArchivo(urlArchivo);
+    this.antecedentesService.openFile3(employeeId.toString(), idAntecedentes, this.nombreArch);
+  }
+
   obtenerNombreArchivo(rutaArchivo: string): string {
     const partesRuta = rutaArchivo.split('/');
     return partesRuta[partesRuta.length - 1];
@@ -226,6 +250,10 @@ export class EditarComponent implements OnInit {
   irDetallesEmpleado(id:number){
     this.getEmployeeFiles();
     this.router.navigate(['editar',id]);
+  }
+
+  RegistrarAntecedentes(id:number){
+    this.router.navigate(['registrarAntecedentes',id]);
   }
 
   obtenerUrlSegura(url: string): SafeUrl {

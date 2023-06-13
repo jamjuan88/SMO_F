@@ -1,0 +1,27 @@
+<div class="container">
+<h1>Registrar Aptitud</h1>
+<form enctype="multipart/form-data" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col form-group">
+            <p>
+                <label for="nombreAptitud">Nombre de la Aptitud:</label>
+                <input type="text" class="form-control" id="nombreAptitud" [(ngModel)]="aptitud.nombreAptitud" name="nombreAptitud" required>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col form-group">
+            <p>
+                <label for="descripcionAptitud">Descripcion de la Aptitud</label>
+                <input type="text" class="form-control" id="descripcionAptitud" [(ngModel)]="aptitud.descripcionAptitud" name="descripcionCategoria" required>
+            </p>
+        </div>
+    </div>   
+    <div>
+        <p class="btn2 col form-group">
+            <button class="btn btn-success" type="submit">Registrar</button>
+        </p>
+        </div>
+</form>
+</div>
+

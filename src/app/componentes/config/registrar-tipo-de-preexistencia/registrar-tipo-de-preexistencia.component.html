@@ -1,0 +1,28 @@
+<div class="container">
+<h1>Registrar Tipo de Preexistencia</h1>
+<form enctype="multipart/form-data" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col form-group">
+            <p>
+                <label for="nombreTipoPreexistencia">Nombre del tipo de Preexistencia:</label>
+                <input type="text" class="form-control" id="nombreTipoPreexistencia" [(ngModel)]="tipoPreex.nombreTipoPreexistencia" name="nombreTipoPreexistencia" required>
+            </p>
+        </div>
+    </div>
+   
+    <div class="row">
+        <div class="col form-group">
+            <p>
+                <label for="descripcionTipoPreexistencia">Descripcion del tipo de Preexistencia:</label>
+                <textarea id="descripcionTipoPreexistencia" [(ngModel)] = "tipoPreex.descripcionTipoPreexistencia" class="form-control" name="descripcionTipoPreexistencia" required></textarea>
+            </p>
+        </div>
+    </div>
+    <div>
+        <p class="btn2 col form-group">
+            <button class="btn btn-success" type="submit">Registrar</button>
+        </p>
+        </div>
+</form>
+</div>
+

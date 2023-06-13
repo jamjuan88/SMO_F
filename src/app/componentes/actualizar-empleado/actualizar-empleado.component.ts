@@ -43,13 +43,7 @@ export class ActualizarEmpleadoComponent implements OnInit {
     this.categoriaService.comboCategoria().subscribe(response => {this.categorias = response});
    }
  
-   private obtenerEmpleados(){
-     this.empleadoService.obtenerListaDeEmpleados().subscribe(dato=>{
-      this.empleados = dato;
-     })
-   }
-
-   actualizarEmpleado(empleado:Empleado):void{
+    actualizarEmpleado(empleado:Empleado):void{
     localStorage.setItem("id",empleado.id.toString());
       this.irADetalles();
     };

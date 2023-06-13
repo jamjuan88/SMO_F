@@ -1,0 +1,36 @@
+<div class="container">
+<h1>Registrar Médico Proveedor</h1>
+<form enctype="multipart/form-data" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col form-group">
+            <p>
+                <label for="nombreMedicoProveedor">Nombre del Médico Proveedor:</label>
+                <input type="text" class="form-control" id="nombreMedicoProveedor" [(ngModel)]="medicoProveedor.nombreMedicoProveedor" name="nombreMedicoProveedor" required>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col form-group">
+            <p>
+                <label for="matriculaMedicoProveedor">Matricula Médico Proveedor</label>
+                <input type="text" class="form-control" id="matriculaMedicoProveedor" [(ngModel)]="medicoProveedor.matriculaMedicoProveedor" name="matriculaMedicoProveedor" required>
+            </p>
+        </div>
+    </div>
+    <div class="col form-group">
+        <p>
+          <label for="proveedoresAptitudes">Proveedor de Aptitudes:</label>
+          <select [(ngModel)]="medicoProveedor.proveedoresAptitudes" id="proveedoresAptitudes" name="proveedoresAptitudes">
+            <option [ngValue]="undefined"> --- seleccionar proveedor de Aptitud --- </option>
+            <option *ngFor="let proveedor of proveedoresAptitudes" [ngValue]="proveedor">{{ proveedor.nombreProveedorAptitud }}</option>
+          </select>
+        </p>
+      </div>
+    <div>
+        <p class="btn2 col form-group">
+            <button class="btn btn-success" type="submit">Registrar</button>
+        </p>
+        </div>
+</form>
+</div>
+

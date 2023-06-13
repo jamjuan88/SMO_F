@@ -1,0 +1,93 @@
+<H1>Registro de Antecedendes: 
+    <div class="text-center">
+      <h2>{{ antecedentes.empleado?.nombre }} {{ antecedentes.empleado?.apellido }}</h2>
+    </div>
+  </H1>
+  
+  
+  
+  
+  
+  <div class="enmarcado">
+    <form>
+    <div class="row">    
+       <div class="row">
+  
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+              <p>
+                <label for="aptitud">Aptitud:</label>
+                   <select [(ngModel)]="antecedentes.aptitudes.idAptitud" name="aptitud" id="aptitud">
+                    <option *ngFor="let aptitud of aptitudes" [value]="aptitud.idAptitud"> {{ aptitud.nombreAptitud }}</option>
+                  </select>
+              </p>
+            </div>
+
+           <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+              <p>
+                <label for="tipoPreexistencia">Tipo de Preexistencia:</label>
+                <select [(ngModel)]="antecedentes.tipoPreexistencia.idTipoPreexistencia" id="tipoPreexistencia" name="tipoPreexistencia">
+                  
+                  <option *ngFor="let tipoPreexistencia of tipoPreexs" [value]= "tipoPreexistencia.idTipoPreexistencia">{{ tipoPreexistencia.nombreTipoPreexistencia }}</option>
+                </select>
+              </p>
+            </div>
+  
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+              <p>
+                <label for="preexistencias">Preexistencias:</label>
+                <select [(ngModel)]="antecedentes.preexistencias.idPreexistencia" id="preexistencias" name="preexistencias">
+                  <option [value]="undefined"> --- seleccionar Preexistencia --- </option>
+                  <option *ngFor="let preexistencia of preexistencias" [value]= "preexistencia.idPreexistencia">{{ preexistencia.nombrePreexistencia }}</option>
+                </select>
+              </p>
+            </div>
+  
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+              <p>
+                <label for="proveedoresAptitudes">Proveedores Aptitudes:</label>
+                <select [(ngModel)]="antecedentes.proveedoresAptitudes.idProveedorAptitud" id="proveedoresAptitudes" name="proveedoresAptitudes">
+                  <option [value]="undefined"> --- Seleccionar Preexistencia --- </option>
+                  <option *ngFor="let proveedoresAptitud of proveedoresAptitudes" [ngValue]="proveedoresAptitud.idProveedorAptitud">{{ proveedoresAptitud.nombreProveedorAptitud }}</option>
+                </select>
+              </p>
+            </div>
+            
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+              <p *ngIf="antecedentes.proveedoresAptitudes">
+                <label for="medicosProveedor">Médicos Proveedores:</label>                
+                <select [(ngModel)]="antecedentes.medicosProveedor.idMedicoProveedor" id="medicosProveedor" name="medicosProveedor">           
+                <option *ngFor="let medico of getMedicosByProveedor(antecedentes.proveedoresAptitudes)" [value]="medico.idMedicoProveedor">{{ medico.nombreMedicoProveedor }}</option>
+                </select>
+              </p>
+            </div>
+
+           
+            
+  
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group" hidden>
+              <p>
+                <label for="empleado">Empleado:</label>
+                <input type="text" [(ngModel)]= "empleado" id="empleado" name="empleado" readonly>
+              </p>
+            </div>
+            
+           <div class="col-xs-12 form-group">
+              <p>
+                <label>Descripción de la Aptitud:</label>
+                <textarea id="descripcionPreexistencia" [(ngModel)]="antecedentes.descripcionPreexistencia" name="descripcionPreexistencia"></textarea>
+              </p>
+            </div>
+       
+        </div>
+        
+        
+          <div>
+            <p class="block"> 
+                <button (click)="Actualizar2(antecedentes.idAntecedentes)" class="btn btn-success">Actualizar</button>
+            </p>
+          </div>
+
+    </div>
+  </form>
+  </div>
+  

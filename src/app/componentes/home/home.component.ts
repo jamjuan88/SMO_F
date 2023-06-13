@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
 
   private obtenerEmpleados(){
     this.empleadoService.obtenerListaDeEmpleados().subscribe(dato=>{
-      this.empleados = dato;
+      this.empleados = dato.reverse();
     })
   }
 
@@ -55,7 +55,6 @@ export class HomeComponent implements OnInit {
 
   eliminarEmpleado(id:number){
     this.empleadoService.eliminarEmpleado(id).subscribe(dato =>{
-      console.log(dato);
       this.obtenerEmpleados();
     })
   }

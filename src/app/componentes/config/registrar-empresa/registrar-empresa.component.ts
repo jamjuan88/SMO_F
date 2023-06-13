@@ -23,11 +23,11 @@ export class RegistrarEmpresaComponent implements OnInit {
   guardarEmpresa(){
     this.empresaService.registrarEmpresa(this.empresa).subscribe(dato =>{
       console.log(dato);
-      this.irListaEmpleados();
+      this.irAConfig();
     },error => console.log(error));
   }
 
-  irListaEmpleados(){
+  irAConfig(){
     this.router.navigate(['config']);
   }
 

@@ -17,7 +17,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let empleado of empleados | filter: term">
+                    <tr [ngClass]="{'blue-row': first}" *ngFor="let empleado of empleados | filter: term, let first = first">
                        
                         <td>{{empleado.nombre}}</td>
                         <td>{{empleado.apellido}}</td>

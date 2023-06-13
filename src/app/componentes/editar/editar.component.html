@@ -7,8 +7,8 @@
         <div>
             <label>
               Estado Laboral:
-              <span [ngClass]="{'activo': empleado.estadoLaboral.nombreEstado === 'Activo', 'inactivo': empleado.estadoLaboral.nombreEstado === 'Inactivo'}">
-                {{ empleado.estadoLaboral.nombreEstado }}
+              <span [ngClass]="{'activo': empleado.estadoLaboral?.nombreEstado === 'Activo', 'inactivo': empleado.estadoLaboral?.nombreEstado === 'Inactivo'}">
+                {{ empleado.estadoLaboral?.nombreEstado }}
               </span>
             </label>
           </div>
@@ -47,15 +47,15 @@
         <h1>Ficha Del Empleado</h1>
         
         <div>
-            <label> <b>Empresa:</b> {{empleado.empresa.nombreEmpresa}} &nbsp; &nbsp; <b>Razon Social:</b> {{empleado.empresa.razonSocial}} &nbsp; &nbsp; <b>Cuit:</b> {{empleado.empresa.cuitEmpresa}}</label>
+            <label> <b>Empresa:</b> {{empleado.empresa?.nombreEmpresa}} &nbsp; &nbsp; <b>Razon Social:</b> {{empleado.empresa?.razonSocial}} &nbsp; &nbsp; <b>Cuit:</b> {{empleado.empresa?.cuitEmpresa}}</label>
         </div>
         
         <div>
-            <label><b>Puesto:</b> {{empleado.puesto.nombrePuesto}} &nbsp; &nbsp; <b>Departamento:</b> {{empleado.puesto.departamento}} &nbsp; &nbsp; <b>Descripción del Puesto:</b> {{empleado.puesto.descripcionPuesto}}</label>
+            <label><b>Puesto:</b> {{empleado.puesto?.nombrePuesto}} &nbsp; &nbsp; <b>Departamento:</b> {{empleado.puesto?.departamento}} &nbsp; &nbsp; <b>Descripción del Puesto:</b> {{empleado.puesto?.descripcionPuesto}}</label>
         </div>
 
         <div>
-            <label><b>Categoría:</b> {{empleado.categoria.nombreCategoria}}</label>
+            <label><b>Categoría:</b> {{empleado.categoria?.nombreCategoria}}</label>
         </div>
  
           <div class="direccion-container">
@@ -80,36 +80,61 @@
 
 
     <h1>Antecedentes Médicos</h1>
+    <div class="bottom-buttons">
+        <div class="container4">
+            <div class="row">
+                <button class="col" (click)="RegistrarAntecedentes(empleado.id)">Registrar</button>
+               
+            </div>
+        </div>
+    </div>
+      
     <div class="container3">   
-       
+        <div class="top-table"> 
             <table class="table2 divided-table">         
                 <thead>
                     <tr>
-                        <th style="width: 9%">Aptitup</th>
-                        <th style="width: 9%">Preexistencia</th>
-                        <th colspan="3" style="width: 37%">Descripcion Aptitup</th>
-                        <th style="width: 9%">Nombre Proveedor</th>
-                        <th style="width: 9%">Localidad Proveedor</th>
-                        <th style="width: 9%">Nombre Medico del Proveedor</th>
-                        <th style="width: 9%">Matricula del Médico</th>
-                        <th style="width: 9%">Examen de Ingreso</th>
-                       
+                        <th style="width: 8%">Aptitup</th>
+                        <th style="width: 8%">TipoPreexistencia</th>
+                        <th style="width: 8%">Preexistencia</th>
+                        <th colspan="3" style="width: 37%">Descripcion</th>
+                        <th style="width: 8%">Nombre Proveedor</th>
+                        <th style="width: 8%">Localidad Proveedor</th>
+                        <th style="width: 8%">Nombre Medico del Proveedor</th>
+                        <th style="width: 8%">Matricula del Médico</th>
+                        <th style="width: 8%">Examen de Ingreso</th>
+                        <th></th>
+                        
                     </tr>
                 </thead>
+
                 <tbody>
                     <tr *ngFor="let antecedente of antecedentes" > 
-                        <td style="width: 9%">{{antecedente.aptitudes.nombreAptitud}}</td>
-                        <td style="width: 9%">Culpable</td>
-                        <td colspan="3" style="width: 37%">{{antecedente.aptitudes.descripcionAptitud}}</td>
-                        <td style="width: 9%">{{antecedente.proveedoresAptitudes.nombreProveedorAptitud}}</td>
-                        <td style="width: 9%">{{antecedente.proveedoresAptitudes.localidadProveedorAptitud}}</td>
-                        <td style="width: 9%">{{antecedente.medicosProveedor.nombreMedicoProveedor}}</td>
-                        <td style="width: 9%">{{antecedente.medicosProveedor.matriculaMedicoProveedor}}</td>
-                        <td style="width: 9%"><a href="#">Archivo.pdf</a></td>
+                        <td style="width: 8%">{{antecedente.aptitudes.nombreAptitud}}</td>
+                        <td style="width: 8%">{{antecedente.tipoPreexistencia.nombreTipoPreexistencia}}</td>
+                        <td style="width: 8%">{{antecedente.preexistencias.nombrePreexistencia}}</td>
+                        <td colspan="3" style="width: 36%">{{antecedente.descripcionPreexistencia}}</td>
+                        <td style="width: 8%">{{antecedente.proveedoresAptitudes.nombreProveedorAptitud}}</td>
+                        <td style="width: 8%">{{antecedente.proveedoresAptitudes.localidadProveedorAptitud}}</td>
+                        <td style="width: 8%">{{antecedente.medicosProveedor.nombreMedicoProveedor}}</td>
+                        <td style="width: 8%">{{antecedente.medicosProveedor.matriculaMedicoProveedor}}</td>
+                          <td>
+                            <span class="file-link" (click)="openFile3(antecedente.empleado.id, antecedente.idAntecedentes, antecedente.urlArchivoExamen)">{{ obtenerNombreArchivo(antecedente.urlArchivoExamen) }}</span>
+                          </td>
+                          <td>
+                            <button class="col" (click)="editarAntecedentes(antecedente)">Editar</button>
+                            <button (click)="eliminarAntecedentes(antecedente.idAntecedentes)" class="btnDelete">Eliminar</button>
+                        </td>
                     </tr>  
                  </tbody>
+                 
             </table>
+        </div>
     </div>
+
+
+
+   
 
 
 

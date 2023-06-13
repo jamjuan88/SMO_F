@@ -14,8 +14,9 @@ export class FaltasEditComponent implements OnInit {
 
   falta: Falta[];
   faltas: Falta = new Falta();
+  
+  empleado:Empleado;
   empleados:Empleado[] = [];
-  empleado:Empleado[];
  
 
   constructor(private router: Router,

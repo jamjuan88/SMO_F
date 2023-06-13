@@ -21,7 +21,7 @@ export class RegistrarComponent implements OnInit {
   empleado : Empleado = new Empleado();
   empleados:Empleado[] = [];
   edad:number;
-  empresa : Empresa;
+  empresa: Empresa;
   empresas: Empresa[] = [];
   categoria : Categoria;
   categorias: Categoria[] = [];

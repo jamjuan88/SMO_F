@@ -1,15 +1,18 @@
-<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
     <app-nav-bar-config></app-nav-bar-config>
 </div> 
 
-<div class="row">
-
-<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+<div class="col-12">
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h1>Empresas</h1>                
-                <table class="table" role="table">
+                <div class="tituloContainer">
+                <h1>Empresas</h1>   
+                <button id="empresas-button" (click)="toggleTable('empresas')" class="btn btn-primary">
+                    Mostrar tabla
+                  </button>
+                </div>          
+                <table id="empresas" style="display: none" class="table" role="table">
                     <thead role="rowgroup">
                         <tr role="row">
                             <th role="columnheader">Nombre de la Empresa</th>
@@ -33,17 +36,60 @@
                         </tr>
                     </tbody>
                 </table>
+                
             </div>
         </div>
     </div>
 </div>
 
-<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+<div class="col">
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h1>Puestos</h1>                
-                <table class="table" role="table">
+                <div class="tituloContainer">
+                    <h1>Categorías</h1>   
+                    <button id="categorias-button" (click)="toggleTable('categorias')" class="btn btn-primary">
+                        Mostrar tabla
+                      </button> 
+                    </div>                 
+                <table id="categorias" style="display: none" class="table" role="table">
+                    <thead role="rowgroup">
+                        <tr role="row">
+                            <th role="columnheader">Nombre de la Categoría</th>
+                            <th role="columnheader">Descripción de la Categoría</th>
+                        </tr>
+                    </thead>
+                    <tbody role="rowgroup">
+                        <tr role="row" *ngFor="let categoria of Categoria">
+                            
+                            <td role="cell">{{categoria.nombreCategoria}}</td>
+                            <td role="cell">{{categoria.descripcionCategoria}}</td>
+                            
+                           <p class="block">
+                               <button (click)="editarCategoria(categoria.idCategoria)" class="btn btn-success" type="submit">Editar</button>
+    
+                                <button (click)="eliminarCategoria(categoria.idCategoria)" class="btn btn-success"
+                                    type="submit">Eliminar</button>
+                            </p> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="tituloContainer">
+                    <h1>Puestos</h1>   
+                    <button id="puestos-button" (click)="toggleTable('puestos')" class="btn btn-primary">
+                        Mostrar tabla
+                      </button> 
+                    </div>                 
+                <table id="puestos" style="display: none" class="table" role="table">
                     <thead role="rowgroup">
                         <tr role="row">
                             <th role="columnheader">Nombre del Puesto</th>
@@ -72,12 +118,54 @@
     </div>
 </div>
 
-<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+<div class="col">
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h1>Estados Empleado</h1>                
-                <table class="table" role="table">
+                <div class="tituloContainer">
+                    <h1>Aptitudes</h1>
+                    <button id="aptitudes-button" (click)="toggleTable('aptitudes')" class="btn btn-primary">
+                        Mostrar tabla
+                    </button>
+                </div>
+                <table id="aptitudes" style="display: none" class="table" role="table">
+                    <thead role="rowgroup">
+                        <tr role="row">
+                            <th role="columnheader">Nombre de la Aptitud</th>
+                            <th role="columnheader">Descripción de la Aptitud</th>
+                        </tr>
+                    </thead>
+                    <tbody role="rowgroup">
+                        <tr role="row" *ngFor="let aptitud of Aptitud">
+                            
+                            <td role="cell">{{aptitud.nombreAptitud}}</td>
+                            <td role="cell">{{aptitud.descripcionAptitud}}</td>
+                            
+                           <p class="block">
+                               <button (click)="editarAptitud(aptitud.idAptitud)" class="btn btn-success" type="submit">Editar</button>
+    
+                                <button (click)="eliminarAptitud(aptitud.idAptitud)" class="btn btn-success"
+                                    type="submit">Eliminar</button>
+                            </p> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="tituloContainer">
+                    <h1>Estados Empleados</h1>
+                    <button id="estados-button" (click)="toggleTable('estados')" class="btn btn-primary">
+                        Mostrar tabla
+                    </button>
+                </div>                
+                <table id="estados" style="display: none" class="table" role="table">
                     <thead role="rowgroup">
                         <tr role="row">
                             <th role="columnheader">Nombre del Estado</th>
@@ -105,7 +193,125 @@
     </div>
 </div>
 
+<div class="col">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="tituloContainer">
+                    <h1>Médicos Proveedores</h1>
+                    <button id="medicosProveedores-button" (click)="toggleTable('medicosProveedores')" class="btn btn-primary">
+                        Mostrar tabla
+                    </button>
+                </div>               
+                <table id="medicosProveedores" style="display: none" class="table" role="table">
+                    <thead role="rowgroup">
+                        <tr role="row">
+                            <th role="columnheader">Nombre del Medico Proveedor</th>
+                            <th role="columnheader">Matricula del Médico Proveedor</th>
+                            <th role="columnheader">Proveedores de Aptitudes</th>
+
+                            
+                                
+                        </tr>
+                    </thead>
+                    <tbody role="rowgroup">
+                        <tr role="row" *ngFor="let medicoProveedor of MedicoProveedor">
+                            
+                            <td role="cell">{{medicoProveedor.nombreMedicoProveedor}}</td>
+                            <td role="cell">{{medicoProveedor.matriculaMedicoProveedor}}</td>
+                            <td role="cell">{{medicoProveedor.proveedoresAptitudes.nombreProveedorAptitud}}</td>
+                         
+                           <p class="block">
+                              <button (click)="editarMedicoProveedor(medicoProveedor.idMedicoProveedor)" class="btn btn-success" type="submit">Editar</button>
+    
+                                <button (click)="eliminarMedicoProveedor(medicoProveedor.idMedicoProveedor)" class="btn btn-success"
+                                    type="submit">Eliminar</button>
+                            </p> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="col">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="tituloContainer">
+                    <h1>Tipos de Preexistencia</h1>
+                    <button id="tipoPreexistencia-button" (click)="toggleTable('tipoPreexistencia')" class="btn btn-primary">
+                        Mostrar tabla
+                    </button>
+                </div>               
+                <table id="tipoPreexistencia" style="display: none" class="table" role="table">
+                    <thead role="rowgroup">
+                        <tr role="row">
+                            <th role="columnheader">Nombre del Tipo de Preexistencia</th>
+                            <th role="columnheader">Descripción del Tipo de Preexistencia</th>
+                        </tr>
+                    </thead>
+                    <tbody role="rowgroup">
+                        <tr role="row" *ngFor="let tipoPreex of TipoPreex">
+                            
+                            <td role="cell">{{tipoPreex.nombreTipoPreexistencia}}</td>
+                            <td role="cell">{{tipoPreex.descripcionTipoPreexistencia}}</td>
+                            
+                         
+                           <p class="block">
+                              <button (click)="editarTipoPreex(tipoPreex.idTipoPreexistencia)" class="btn btn-success" type="submit">Editar</button>
+    
+                                <button (click)="eliminarTipoPreex(tipoPreex.idTipoPreexistencia)" class="btn btn-success"
+                                    type="submit">Eliminar</button>
+                            </p> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="tituloContainer">
+                    <h1>Preexistencia</h1>
+                    <button id="preexistencia-button" (click)="toggleTable('preexistencia')" class="btn btn-primary">
+                        Mostrar tabla
+                    </button>
+                </div>                
+                <table id="preexistencia" style="display: none" class="table" role="table">
+                    <thead role="rowgroup">
+                        <tr role="row">
+                            <th role="columnheader">Nombre de la Preexistencia</th>
+                            <th role="columnheader">Descripción de la Preexistencia</th>
+                        </tr>
+                    </thead>
+                    <tbody role="rowgroup">
+                        <tr role="row" *ngFor="let preex of Preex">
+                            
+                            <td role="cell">{{preex.nombrePreexistencia}}</td>
+                            <td role="cell">{{preex.descripcionPreexistencia}}</td>
+                            
+                         
+                           <p class="block">
+                              <button (click)="editarPreex(preex.idPreexistencia)" class="btn btn-success" type="submit">Editar</button>
+    
+                                <button (click)="eliminarPreex(preex.idPreexistencia)" class="btn btn-success"
+                                    type="submit">Eliminar</button>
+                            </p> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
                

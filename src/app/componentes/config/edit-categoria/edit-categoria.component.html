@@ -1,0 +1,27 @@
+<h1>Actualizar Datos de la Categoria</h1>
+<form >
+    <div class="row">
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+            <p>
+                <label for="nombreCategoria">Nombre de la Categoria:</label>
+                <input type="text" class="form-control" id="nombreCategoria" [(ngModel)] = "categoria.nombreCategoria" name="nombreCategoria" required>
+            </p>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+            <p>
+                <label for="descripcionCategoria">Descripción de la categoría</label>
+                <input type="text" class="form-control" id="descripcionCategoria" [(ngModel)]= "categoria.descripcionCategoria" name="razonSocial" required>
+            </p>
+        </div>
+       
+    </div>
+   
+    <div>
+        <p class="block"> 
+          <button (click)="ActualizarCategoria()" class="btn btn-success">Actualizar</button>
+        </p>
+      </div>
+</form>

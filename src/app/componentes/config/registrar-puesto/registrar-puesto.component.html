@@ -1,10 +1,8 @@
-<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-   
-</div> 
+<div class="container"> 
 <h1>Registrar Puesto</h1>
 <form enctype="multipart/form-data" (ngSubmit)="onSubmit()">
     <div class="row">
-        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+        <div class="col form-group">
             <p>
                 <label for="nombrePuesto">Nombre del Puesto:</label>
                 <input type="text" class="form-control" id="nombrePuesto" [(ngModel)]="puesto.nombrePuesto" name="nombrePuesto" required>
@@ -12,7 +10,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+        <div class="col form-group">
             <p>
                 <label for="departamento">Departamento</label>
                 <input type="text" class="form-control" id="departamento" [(ngModel)]="puesto.departamento" name="departamento" required>
@@ -20,7 +18,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 form-group">
+        <div class="col form-group">
             <p>
                 <label for="nombre">descripcionPuesto</label>
                 <textarea id="descripcionPuesto" [(ngModel)] = "puesto.descripcionPuesto" class="form-control" name="descripcionPuesto" required></textarea>
@@ -28,8 +26,9 @@
         </div>
     </div>
     <div>
-        <p class="btn2 col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+        <p class="btn2 col form-group">
             <button class="btn btn-success" type="submit">Registrar Puesto</button>
         </p>
         </div>
 </form>
+</div>
